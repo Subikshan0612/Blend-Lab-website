@@ -15,7 +15,6 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as QuoteRouteImport } from './routes/quote'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as WorkRouteImport } from './routes/work'
-import { Route as ApiPublicGithubPushRouteImport } from './routes/api/public/github-push'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -47,11 +46,6 @@ const WorkRoute = WorkRouteImport.update({
   path: '/work',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiPublicGithubPushRoute = ApiPublicGithubPushRouteImport.update({
-  id: '/api/public/github-push',
-  path: '/api/public/github-push',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -60,7 +54,6 @@ export interface FileRoutesByFullPath {
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
   '/work': typeof WorkRoute
-  '/api/public/github-push': typeof ApiPublicGithubPushRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -69,7 +62,6 @@ export interface FileRoutesByTo {
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
   '/work': typeof WorkRoute
-  '/api/public/github-push': typeof ApiPublicGithubPushRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -79,36 +71,14 @@ export interface FileRoutesById {
   '/quote': typeof QuoteRoute
   '/services': typeof ServicesRoute
   '/work': typeof WorkRoute
-  '/api/public/github-push': typeof ApiPublicGithubPushRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths:
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/quote'
-    | '/services'
-    | '/work'
-    | '/api/public/github-push'
+  fullPaths: '/' | '/about' | '/contact' | '/quote' | '/services' | '/work'
   fileRoutesByTo: FileRoutesByTo
-  to:
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/quote'
-    | '/services'
-    | '/work'
-    | '/api/public/github-push'
+  to: '/' | '/about' | '/contact' | '/quote' | '/services' | '/work'
   id:
-    | '__root__'
-    | '/'
-    | '/about'
-    | '/contact'
-    | '/quote'
-    | '/services'
-    | '/work'
-    | '/api/public/github-push'
+    '__root__' | '/' | '/about' | '/contact' | '/quote' | '/services' | '/work'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -118,7 +88,6 @@ export interface RootRouteChildren {
   QuoteRoute: typeof QuoteRoute
   ServicesRoute: typeof ServicesRoute
   WorkRoute: typeof WorkRoute
-  ApiPublicGithubPushRoute: typeof ApiPublicGithubPushRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -165,13 +134,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WorkRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/public/github-push': {
-      id: '/api/public/github-push'
-      path: '/api/public/github-push'
-      fullPath: '/api/public/github-push'
-      preLoaderRoute: typeof ApiPublicGithubPushRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -182,7 +144,6 @@ const rootRouteChildren: RootRouteChildren = {
   QuoteRoute: QuoteRoute,
   ServicesRoute: ServicesRoute,
   WorkRoute: WorkRoute,
-  ApiPublicGithubPushRoute: ApiPublicGithubPushRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
